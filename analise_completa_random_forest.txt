@@ -1,0 +1,138 @@
+ANÁLISE PREDITIVA DO TEMPO DE PERMANÊNCIA COM RANDOM FOREST
+
+============================================================
+
+--- TABELA COMPARATIVA DE PERFORMANCE DOS MODELOS ---
+
+                   MAE      RMSE        R2  N_Amostras
+Sul           1.102316  1.504153  0.344139        1422
+Norte         0.963100  1.353064  0.340591         500
+Nacional      0.982359  1.402267  0.311988        8703
+Centro-Oeste  0.903980  1.225267  0.294363         488
+Sudeste       0.894126  1.307931  0.279083        5027
+Nordeste      1.351299  1.909865  0.267723        1266
+
+
+============================================================
+
+--- ANÁLISE DAS VARIÁVEIS MAIS IMPORTANTES (FEATURE IMPORTANCE) ---
+
+
+--- Top 15 Features para o Nacional ---
+
+faixa_etaria         0.161763
+q11_A                0.061302
+sigla_uf_curso_RN    0.026876
+sigla_uf_curso_RS    0.019297
+in_capital_curso     0.017628
+sigla_uf_curso_PE    0.014480
+q10_E                0.014335
+q16                  0.012808
+sigla_uf_curso_BA    0.010131
+q14_B                0.010060
+q20_B                0.008379
+q17_B                0.006438
+q17_A                0.006040
+q11_B                0.004988
+q2_D                 0.004882
+
+
+
+--- Top 15 Features para o Norte ---
+
+faixa_etaria        0.188569
+q11_E               0.043206
+q9_B                0.026756
+q11_B               0.020734
+q16                 0.017821
+q27_4               0.014866
+q14_B               0.013610
+q20_B               0.012818
+q56_6               0.012460
+q8_G                0.011687
+q4_F                0.011287
+q32_6               0.010492
+in_capital_curso    0.010338
+q31_6               0.010054
+q22_C               0.009567
+
+
+
+--- Top 15 Features para o Nordeste ---
+
+faixa_etaria    0.164413
+q16             0.112300
+q11_E           0.013663
+q10_E           0.013187
+q5_E            0.012300
+q17_B           0.012023
+q8_E            0.010184
+q9_F            0.009958
+q2_F            0.009402
+q1_C            0.007602
+q64_2           0.007462
+q14_B           0.006756
+q46_5           0.006070
+q2_D            0.005755
+q51_4           0.005306
+
+
+
+--- Top 15 Features para o Sudeste ---
+
+faixa_etaria        0.143935
+q11_A               0.083501
+in_capital_curso    0.035206
+q16                 0.018244
+q14_B               0.017198
+q11_B               0.012658
+q22_B               0.009732
+q10_E               0.009724
+q8_B                0.007282
+q19_B               0.007232
+q8_F                0.006357
+q14_A               0.005830
+q24_A               0.005278
+q26_F               0.004914
+q5_F                0.004772
+
+
+
+--- Top 15 Features para o Sul ---
+
+faixa_etaria        0.189734
+in_capital_curso    0.061598
+q16                 0.039055
+q11_B               0.013177
+q14_B               0.012646
+q7_D                0.009434
+q53_6               0.008571
+tp_sexo_M           0.006694
+q46_8               0.006360
+q9_D                0.006359
+q7_G                0.005285
+q5_D                0.005261
+q20_D               0.005257
+q26_F               0.005214
+q4_D                0.005082
+
+
+
+--- Top 15 Features para o Centro-Oeste ---
+
+faixa_etaria    0.189668
+q16             0.032275
+q4_F            0.025123
+q49_2           0.024923
+q19_B           0.020529
+q17_B           0.020046
+q24_E           0.017759
+q7_D            0.016163
+q25_H           0.012356
+q14_B           0.011017
+q29_3           0.010271
+q2_C            0.010108
+q6_C            0.008125
+q11_E           0.007705
+q41_3           0.007321
+
