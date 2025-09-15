@@ -1,0 +1,57 @@
+Etapas da Análise:
+1. Tratamento e Preparação dos Dados
+
+- Seleção e Filtragem: Carregamos o dataset bruto do ENADE e o filtramos para manter apenas os alunos dos cursos de Computação e áreas afins (co_grupo) que estavam presentes na prova (tp_pres).
+
+- Criação da Variável Alvo: A variável tempo_permanencia foi criada subtraindo o ano de ingresso (ano_in_grad) do ano do ENADE (nu_ano_enade).
+
+- Limpeza: Removemos linhas com dados ausentes ou inválidos (células vazias, valores como "Ausente" ou "SEM INFORMACAO"), resultando em um dataset final, limpo e pronto para a modelagem.
+
+2. Modelagem Preditiva (Aprendizado Supervisionado)
+
+- Algoritmo: Utilizamos o Random Forest Regressor para prever o tempo_permanencia.
+
+- Performance do Modelo Base: O modelo inicial, treinado com todas as variáveis socioeconômicas e demográficas, alcançou uma performance de R² ≈ 31% e um Erro Médio Absoluto (MAE) de aproximadamente 1 ano.
+
+- Análise de Fatores (Feature Importance): Identificamos que a faixa etária (faixa_etaria) é, de longe, o fator mais importante para a previsão, seguida por variáveis socioeconômicas como renda familiar (q11) e escolaridade da família (q16).
+
+3. Análise de Perfis (Aprendizado Não Supervisionado)
+
+- Objetivo: Descobrir a estrutura oculta e os perfis de alunos nos dados, sem usar a variável tempo_permanencia.
+
+- K-Means Clustering: Agrupamos os alunos em 5 "perfis". A análise revelou grupos distintos, como um "Perfil Rápido" (mais jovem, maior renda, menor tempo de curso) e um "Perfil Trabalhador" (mais velho, menor renda, maior tempo de curso).
+
+- PCA (Análise de Componentes Principais): A análise mostrou que a maior parte da variação entre os alunos pode ser explicada por um único "eixo" principal, provavelmente relacionado à maturidade e background socioeconômico.
+
+- SOM (Mapas Auto-Organizáveis): Criamos visualizações (mapas de calor) que confirmaram a forte correlação entre a faixa_etaria e o tempo_permanencia, mostrando que alunos com perfis similares se agrupam em regiões específicas do mapa.
+
+4. Síntese e Modelagem Avançada
+
+Teste de Hipótese: Tentamos usar os resultados do aprendizado não supervisionado para melhorar o modelo preditivo.
+
+Modelo com PCA: Um novo Random Forest treinado com os componentes do PCA teve um desempenho muito baixo (R² ≈ 3%), provando que a redução de dimensionalidade com PCA perdia informações cruciais para a previsão.
+
+Modelo com SOM: Um terceiro modelo, enriquecido com features do SOM, teve uma performance idêntica à do modelo original (R² ≈ 31%), indicando que o Random Forest já era poderoso o suficiente para extrair aquela informação sozinho.
+
+
+5. Conclusão Geral
+A análise concluiu com sucesso duas frentes:
+
+Predição: Criamos um modelo Random Forest capaz de prever o tempo de permanência com uma precisão razoável.
+
+Interpretação: Através de técnicas não supervisionadas, identificamos e descrevemos diferentes "personas" de estudantes, explicando por que seus tempos de curso variam, validando as descobertas do modelo preditivo.
+
+6. Random forest vs XGBoost
+Modelo com XGBoost: Um quarto modelo utilizando apenas XGBoost foi gerado. Para a tarefa de prever o tempo de permanência, o modelo XGBoost treinado com os dados do Brasil inteiro é o melhor e mais robusto modelo preditivo que construímos. A estratégia de separar por regiões, que ajudou o Random Forest, não foi tão vantajosa para o XGBoost, que parece se beneficiar mais da maior quantidade e diversidade de dados do cenário nacional.
+
+Random Forest: Considerou a faixa_etaria (idade) o fator mais crítico.
+
+XGBoost: Considerou a q11_A (pertencer à faixa de renda familiar mais baixa) o fator mais crítico. A idade (faixa_etaria) ainda é a segunda mais importante, mas sua dominância foi quebrada.
+
+Modelo		R² com Random Forest	R² com XGBoost	Vencedor
+Nacional	31.2%			33.7%		XGBoost
+Sul		34.4%			29.7%		Random Forest
+Norte		34.1%			28.8%		Random Forest
+Nordeste	26.8%			28.7%		XGBoost
+Sudeste		27.9%			28.3%		XGBoost
+Centro-Oeste	29.4%			26.3%		Random Forest

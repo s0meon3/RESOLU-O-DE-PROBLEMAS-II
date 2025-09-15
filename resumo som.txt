@@ -1,0 +1,19 @@
+Padronizando a escala das features...
+Treinando o SOM de 40x40...
+Treinamento do SOM concluído.
+
+Criando novas features a partir do SOM...
+Calculando o erro de quantização para cada aluno...
+Dataset enriquecido criado com 850 features.
+
+Treinando o Random Forest com o dataset enriquecido...
+Avaliando o novo modelo...
+
+============================================================
+--- RESULTADO FINAL DA ANÁLISE ---
+
+Performance do Modelo Original (com features originais):
+MAE: ~0.98 anos | RMSE: ~1.40 anos | R²: ~31.2%
+
+Performance do Novo Modelo (features originais + features do SOM):
+MAE: 0.98 anos | RMSE: 1.40 anos | R²: 31.23%
