@@ -1,12 +1,8 @@
 import pandas as pd
 
-# --- 1. CONFIGURAÇÃO ---
-# Arquivo de entrada
 nome_arquivo_entrada = 'SoU_enade_2019.csv'
-# Defina o nome do novo arquivo que será gerado
 nome_arquivo_saida = 'enade_computacao_2019_limpo_final.csv'
 
-# Lista de CÓDIGOS DE GRUPO de Computação e áreas afins
 cursos_para_filtrar = [
     40, 72, 79, 4003, 4004, 4005, 4006, 4007, 5809, 
     6409, 5811, 5813, 5814, 5815
@@ -16,9 +12,8 @@ in_gratuito_validos = [0, 1]
 regiao_curso_validas = [1, 2, 3, 4, 5]
 tp_pres_presente = 555
 
-# Colunas para selecionar
 colunas_para_selecionar = [
-    'nu_ano_enade', 'in_capital_curso', 'faixa_etaria', 'tp_sexo', 'ano_in_grad',
+    'nu_ano_enade', 'in_capital_curso', 'tp_categoria_administrativa_ies','faixa_etaria', 'tp_sexo', 'ano_in_grad',
     'nt_ger', 'nt_fg', 'sigla_uf_curso', 'co_regiao_curso',
     'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10',
     'q11', 'q12', 'q13', 'q14', 'q15', 'q16', 'q17', 'q18', 'q19', 'q20',
@@ -29,17 +24,15 @@ colunas_para_selecionar = [
     'q61', 'q62', 'q63', 'q64', 'q65', 'q66', 'q67', 'q68'
 ]
 
-# Valores de texto indesejados
 valores_para_apagar = ['Ausente', 'SEM INFORMACAO']
 
-# --- 2. EXECUÇÃO DO SCRIPT ---
 try:
     print(f"Carregando o arquivo '{nome_arquivo_entrada}'...")
     df = pd.read_csv(nome_arquivo_entrada, sep=';', encoding='latin-1', low_memory=False)
     df.columns = df.columns.str.lower()
     print(f"Arquivo carregado. Shape original: {df.shape}\n")
 
-    # Passo 1: Filtragem
+
     print("Iniciando a filtragem...")
     df_filtrado = df[
         (df['co_grupo'].isin(cursos_para_filtrar)) &
@@ -50,31 +43,24 @@ try:
     ]
     print(f"Shape após a filtragem: {df_filtrado.shape}\n")
 
-    # Passo 2: Seleção das colunas
     print("Selecionando colunas...")
     df_selecionado = df_filtrado[colunas_para_selecionar]
     print(f"Shape após a seleção de colunas: {df_selecionado.shape}\n")
 
-    # Passo 3: Limpeza de Dados
-    # Passo 3a: Remoção de linhas com textos específicos
     print(f"Limpando linhas com os valores: {valores_para_apagar}...")
     mascara_remocao = df_selecionado.isin(valores_para_apagar).any(axis=1)
     df_limpo_strings = df_selecionado[~mascara_remocao].copy()
     print(f"Shape após limpeza de strings: {df_limpo_strings.shape}")
     
-    # --- NOVO PASSO ---
-    # Passo 3b: Remoção de linhas com qualquer célula vazia (NaN)
     print("Removendo linhas com células vazias...")
     df_final = df_limpo_strings.dropna(how='any')
     print(f"Shape final do DataFrame após remover vazios: {df_final.shape}\n")
 
-    # Passo 4: Exibição dos resultados
     print("--- AMOSTRA DO RESULTADO ---")
     print("Amostra do DataFrame final e limpo:")
     print(df_final.head())
     print(f"\nResumo: De {df.shape[0]} linhas originais, o DataFrame final possui {df_final.shape[0]} linhas.")
 
-    # Passo 5: Salvando o resultado
     if not df_final.empty:
         print(f"\nSalvando o DataFrame limpo em '{nome_arquivo_saida}'...")
         df_final.to_csv(nome_arquivo_saida, sep=';', encoding='utf-8-sig', index=False)

@@ -1,0 +1,66 @@
+1. Score de propensão
+ATT estimado: 1.3775
+Executando bootstrapping...
+
+--- Resultados ---
+Efeito médio do tratamento (ATT): 1.3775
+Erro padrão (bootstrap): 0.0282
+z-score: 48.80
+p-valor: 0.0000
+
+A análise de pareamento por score de propensão (PSM) foi conduzida para estimar o efeito causal de frequentar uma instituição de ensino superior pública no tempo de permanência em cursos de computação. Após o pareamento dos alunos com base em um amplo conjunto de covariáveis, o Efeito Médio do Tratamento nos Tratados (ATT) estimado foi de +1.38 anos. A significância estatística deste resultado foi avaliada através de bootstrapping, que indicou um erro padrão de 0.0282 e um p-valor < 0.0001. Portanto, podemos concluir com alta confiança estatística que, mantendo as outras características constantes, estudar em uma IES pública está associado a um aumento de aproximadamente 1 ano e 5 meses no tempo de conclusão do curso, em comparação com alunos de perfil similar em IES privadas.
+
+2. na pasta
+3. Análise das 10 Features Mais Importantes (XGBoost)
+1. q11_A
+
+O que Significa (Provavelmente): q11 é a pergunta sobre a renda total da família. A resposta 'A' é consistentemente a faixa de renda mais baixa (ex: até 1,5 salário mínimo).
+
+Por que é Importante (Hipótese): Esta é a variável socioeconômica mais direta. Pertencer à faixa de renda mais baixa é um forte indicador de que o aluno pode precisar trabalhar para se sustentar, ter menos acesso a recursos (bons materiais, transporte, alimentação) e enfrentar mais estresse financeiro. Todos esses fatores são barreiras que podem levar a um aumento no tempo de permanência no curso. O XGBoost identificou isso como o fator mais crítico.
+
+2. faixa_etaria
+
+O que Significa: A faixa de idade do aluno.
+
+Por que é Importante: Como já vimos em todas as nossas análises, a idade é um poderoso "proxy" para a experiência de vida. Alunos mais velhos têm uma probabilidade muito maior de já terem um emprego, família ou outras responsabilidades, o que naturalmente compete com o tempo dedicado aos estudos e prolonga a jornada acadêmica.
+
+3. sigla_uf_curso_RS (Rio Grande do Sul)
+4. sigla_uf_curso_RN (Rio Grande do Norte)
+5. sigla_uf_curso_PE (Pernambuco)
+
+O que Significa: São variáveis "dummy" que indicam se o aluno estuda em um desses três estados específicos.
+
+Por que são Importantes: O modelo descobriu que, mesmo depois de considerar a renda, idade e outras características, o simples fato de estudar em um desses estados tem um poder preditivo significativo. Isso sugere que existem fatores locais — como o perfil das universidades, o mercado de trabalho local para estudantes, políticas educacionais específicas do estado, ou características culturais/econômicas regionais — que não são capturados pelas outras perguntas, mas que influenciam o tempo de permanência.
+
+6. q44_5
+
+O que Significa (Hipótese): As questões na faixa Q40-Q60 geralmente abordam a percepção do aluno sobre a infraestrutura e organização do curso. q44 poderia ser sobre a qualidade da biblioteca, laboratórios ou acesso a equipamentos. A resposta _5 seria um ponto em uma escala (ex: "Muito boa" ou "Muito ruim").
+
+Por que é Importante: Uma percepção muito negativa ou positiva sobre a infraestrutura pode estar ligada ao engajamento e à progressão do aluno. Por exemplo, a falta de laboratórios adequados pode atrasar projetos e a formatura.
+
+7. q10_E
+
+O que Significa (Hipótese): q10 frequentemente pergunta com quem o aluno mora. A resposta 'E' pode ser algo como "Sozinho(a)" ou "Com cônjuge/filhos".
+
+Por que é Importante: Morar sozinho ou com a própria família implica um nível de responsabilidade doméstica e financeira muito maior do que morar com os pais, o que impacta diretamente o tempo disponível para os estudos.
+
+8. q58_6
+
+O que Significa (Hipótese): As questões na faixa Q50-Q60 também podem ser sobre a qualidade do corpo docente. q58 poderia ser uma pergunta como "Os professores demonstram bom domínio do conteúdo que ensinam?".
+
+Por que é Importante: A percepção sobre a qualidade dos professores é um fator direto na motivação e no aprendizado do aluno. Uma avaliação extrema (muito boa ou muito ruim) pode diferenciar os alunos que se sentem apoiados e progridem bem daqueles que se sentem desamparados.
+
+9. q17_B
+
+O que Significa (Provavelmente): q17 é a pergunta sobre a situação de trabalho do aluno. A resposta 'B' é tipicamente "Trabalho, mas não na minha área de formação".
+
+Por que é Importante: Esta feature captura diretamente o aluno "trabalhador". Ter um emprego que não está relacionado ao curso consome tempo e energia, mas não contribui para a experiência profissional na área, sendo um forte motivo para o prolongamento do curso.
+
+10. q67_2
+
+O que Significa (Hipótese): As questões no final do questionário (Q60+) frequentemente investigam os hábitos de estudo do próprio aluno. q67 poderia ser sobre o número de horas de estudo extraclasse. A resposta _2 seria uma faixa específica (ex: "de 3 a 5 horas por semana").
+
+Por que é Importante: O modelo pode ter descoberto que uma faixa específica de horas de estudo é um ponto de inflexão, separando alunos com dedicação suficiente para avançar no ritmo esperado daqueles que, por estudarem menos, acabam levando mais tempo.
+
+Em resumo, o modelo XGBoost construiu sua previsão com base em um tripé de informações: 1) Condições socioeconômicas e demográficas (q11, faixa_etaria), 2) Fatores contextuais/locais (os estados), e 3) A experiência e percepção do aluno sobre sua vida e o próprio curso (q10, q17, q58, etc.).
+

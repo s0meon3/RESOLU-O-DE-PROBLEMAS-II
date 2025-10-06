@@ -1,0 +1,67 @@
+ANÁLISE PREDITIVA COM XGBOOST E SELEÇÃO DE FEATURES
+
+============================================================
+
+--- FEATURES SELECIONADAS (IMPORTÂNCIA >= 0.01) ---
+
+
+--- Features para o Nacional (4 selecionadas) ---
+
+['faixa_etaria', 'sigla_uf_curso_RN', 'sigla_uf_curso_RS', 'q11_A']
+
+
+
+--- Features para o Norte (15 selecionadas) ---
+
+['faixa_etaria', 'q5_B', 'q9_B', 'q11_E', 'q15_C', 'q19_B', 'q27_6', 'q31_6', 'q32_6', 'q44_3', 'q45_6', 'q54_4', 'q55_6', 'q56_6', 'q57_6']
+
+
+
+--- Features para o Nordeste (10 selecionadas) ---
+
+['faixa_etaria', 'q5_C', 'q9_F', 'q10_E', 'q17_B', 'q48_2', 'q55_6', 'q63_3', 'q64_2', 'q66_6']
+
+
+
+--- Features para o Sudeste (3 selecionadas) ---
+
+['faixa_etaria', 'q11_A', 'q57_3']
+
+
+
+--- Features para o Sul (5 selecionadas) ---
+
+['faixa_etaria', 'q19_F', 'q29_4', 'q36_5', 'q50_5']
+
+
+
+--- Features para o Centro-Oeste (21 selecionadas) ---
+
+['faixa_etaria', 'q4_B', 'q4_F', 'q6_C', 'q7_D', 'q11_E', 'q11_H', 'q15_E', 'q19_B', 'q20_G', 'q23_E', 'q25_H', 'q28_4', 'q29_3', 'q32_3', 'q35_3', 'q37_4', 'q39_3', 'q42_6', 'q49_2', 'q49_5']
+
+
+
+============================================================
+
+--- PERFORMANCE DOS MODELOS COM TODAS AS FEATURES ---
+
+                   MAE      RMSE        R2  N_Amostras
+Nacional      0.965599  1.376239  0.337292        8703
+Sul           1.135369  1.557714  0.296599        1422
+Norte         1.018346  1.406340  0.287642         500
+Nordeste      1.352568  1.884355  0.287154        1266
+Sudeste       0.888036  1.304732  0.282605        5027
+Centro-Oeste  0.949954  1.252124  0.263089         488
+
+
+============================================================
+
+--- PERFORMANCE DOS MODELOS COM FEATURES SELECIONADAS ---
+
+                   MAE      RMSE        R2  N_Amostras
+Nacional      1.028698  1.423516  0.290979        8703
+Centro-Oeste  0.923833  1.235090  0.283003         488
+Norte         1.084931  1.438443  0.254748         500
+Sudeste       0.948205  1.359656  0.220934        5027
+Nordeste      1.481276  1.974626  0.217220        1266
+Sul           1.230341  1.722418  0.139987        1422
