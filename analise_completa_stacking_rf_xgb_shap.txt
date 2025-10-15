@@ -1,0 +1,527 @@
+ANÁLISE PREDITIVA DO TEMPO DE PERMANÊNCIA COM STACKING (RF + XGBoost) + SHAP
+
+================================================================================
+
+--- TABELA COMPARATIVA DE PERFORMANCE (RF vs XGB vs STACKING) ---
+
+              MAE_RF  RMSE_RF  R2_RF  MAE_XGB  RMSE_XGB  R2_XGB  MAE_STACK  RMSE_STACK  R2_STACK  N_Amostras  N_Features
+Nacional      0.9442   1.3533 0.3592   0.9672    1.3635  0.3495     0.9353      1.3346    0.3768        8703         518
+Sudeste       0.8705   1.2661 0.3244   0.8878    1.2836  0.3057     0.8617      1.2560    0.3352        5027         497
+Sul           1.1040   1.5115 0.3378   1.1003    1.5125  0.3368     1.1109      1.5202    0.3301        1422         426
+Nordeste      1.3260   1.8338 0.3249   1.3268    1.8187  0.3360     1.3352      1.8428    0.3183        1266         427
+Centro-Oeste  0.8578   1.2027 0.3201   0.8500    1.1709  0.3556     0.8746      1.2137    0.3076         488         416
+Norte         1.0022   1.4548 0.2377   0.9840    1.4175  0.2763     0.9844      1.4219    0.2718         500         408
+
+
+================================================================================
+
+--- ANÁLISE DE VARIÁVEIS MAIS IMPORTANTES (FEATURE IMPORTANCE) ---
+
+
+--- Top 15 Features (Random Forest) para Nacional ---
+
+faixa_etaria                       0.156910
+tp_categoria_administrativa_ies    0.081553
+sigla_uf_curso_RN                  0.027629
+q16                                0.018704
+in_capital_curso                   0.017141
+sigla_uf_curso_BA                  0.016832
+q10_E                              0.015987
+sigla_uf_curso_RS                  0.014638
+sigla_uf_curso_PE                  0.013771
+q11_B                              0.008909
+q14_B                              0.008769
+q20_B                              0.006750
+q19_B                              0.004401
+q10_A                              0.004282
+co_regiao_curso                    0.003937
+
+
+--- Top 15 Features (XGBoost) para Nacional ---
+
+sigla_uf_curso_RN                  0.021080
+q14_B                              0.011436
+sigla_uf_curso_PE                  0.009981
+q11_A                              0.009813
+sigla_uf_curso_BA                  0.009064
+sigla_uf_curso_RS                  0.008705
+faixa_etaria                       0.008142
+q10_E                              0.006588
+q20_B                              0.006543
+q49_8                              0.006231
+tp_categoria_administrativa_ies    0.005908
+q56_8                              0.005872
+q53_1                              0.005670
+sigla_uf_curso_DF                  0.005223
+q20_F                              0.005199
+
+
+
+--- Top 15 Features (Random Forest) para Norte ---
+
+tp_categoria_administrativa_ies    0.179654
+faixa_etaria                       0.171785
+in_capital_curso                   0.020501
+q9_B                               0.017371
+q8_G                               0.016713
+q25_D                              0.013934
+q1_E                               0.013500
+q27_4                              0.013130
+q7_H                               0.012863
+q14_B                              0.012415
+q20_B                              0.012166
+q14_E                              0.011137
+q5_C                               0.011014
+q9_C                               0.009969
+q15_B                              0.008924
+
+
+--- Top 15 Features (XGBoost) para Norte ---
+
+q67_8    0.047637
+q34_8    0.031958
+q25_D    0.031354
+q32_6    0.026937
+q33_8    0.026424
+q27_8    0.021148
+q26_I    0.020117
+q55_8    0.016864
+q57_3    0.016706
+q68_8    0.015830
+q27_5    0.014984
+q41_8    0.014208
+q41_5    0.013721
+q58_3    0.013648
+q20_B    0.012793
+
+
+
+--- Top 15 Features (Random Forest) para Nordeste ---
+
+faixa_etaria                       0.170153
+q16                                0.111980
+tp_categoria_administrativa_ies    0.054837
+q10_E                              0.017974
+q2_F                               0.011781
+q8_E                               0.008915
+q5_E                               0.008071
+q14_B                              0.007264
+q46_5                              0.007147
+q5_C                               0.006943
+q17_B                              0.006887
+q64_6                              0.006700
+q1_C                               0.006303
+q11_E                              0.005465
+q9_F                               0.005207
+
+
+--- Top 15 Features (XGBoost) para Nordeste ---
+
+q66_8           0.016322
+q2_F            0.015767
+q37_3           0.013726
+q64_6           0.012496
+q10_E           0.011136
+q63_3           0.010745
+q38_3           0.010552
+q14_B           0.010491
+faixa_etaria    0.010220
+q26_H           0.010213
+q5_C            0.009633
+q55_3           0.009613
+q51_4           0.009213
+q55_2           0.009194
+q13_F           0.009182
+
+
+
+--- Top 15 Features (Random Forest) para Sudeste ---
+
+faixa_etaria                       0.134524
+tp_categoria_administrativa_ies    0.132428
+q16                                0.015480
+q14_B                              0.014595
+in_capital_curso                   0.012857
+q11_B                              0.010823
+q8_B                               0.007931
+q17_B                              0.007671
+q19_B                              0.007435
+q10_E                              0.006652
+q5_F                               0.006455
+q20_F                              0.005905
+q8_F                               0.005865
+q6_D                               0.005301
+q14_A                              0.005238
+
+
+--- Top 15 Features (XGBoost) para Sudeste ---
+
+q14_B                              0.020799
+q30_8                              0.011132
+q11_A                              0.010739
+faixa_etaria                       0.007344
+tp_categoria_administrativa_ies    0.007317
+q1_C                               0.006571
+q53_1                              0.006557
+q62_7                              0.006491
+q56_7                              0.006310
+q28_1                              0.006222
+q61_1                              0.006012
+q36_2                              0.005894
+q51_3                              0.005828
+q19_B                              0.005437
+q64_1                              0.005358
+
+
+
+--- Top 15 Features (Random Forest) para Sul ---
+
+faixa_etaria                       0.194985
+in_capital_curso                   0.051437
+q16                                0.035500
+tp_categoria_administrativa_ies    0.016311
+q11_B                              0.012291
+q7_D                               0.012204
+q20_D                              0.011713
+q14_B                              0.011563
+q46_5                              0.011043
+q9_D                               0.006870
+q8_D                               0.006847
+q10_E                              0.006786
+q25_B                              0.006611
+q5_E                               0.006312
+q53_6                              0.006061
+
+
+--- Top 15 Features (XGBoost) para Sul ---
+
+q67_2           0.015298
+q27_3           0.014755
+q46_5           0.012566
+q24_D           0.012147
+q7_G            0.011961
+faixa_etaria    0.011492
+q47_7           0.011264
+q30_2           0.010842
+q14_B           0.010329
+q26_B           0.009447
+q66_8           0.009439
+q67_3           0.009321
+q63_3           0.008906
+q20_B           0.008114
+q44_3           0.008030
+
+
+
+--- Top 15 Features (Random Forest) para Centro-Oeste ---
+
+faixa_etaria                       0.188650
+q16                                0.021076
+q4_F                               0.020496
+q60_2                              0.019325
+q35_3                              0.018336
+q19_B                              0.017293
+tp_categoria_administrativa_ies    0.016608
+q24_E                              0.014663
+q2_C                               0.013721
+q7_D                               0.013548
+q14_B                              0.012732
+q25_H                              0.010543
+q6_C                               0.010402
+q11_J                              0.009505
+q39_3                              0.009315
+
+
+--- Top 15 Features (XGBoost) para Centro-Oeste ---
+
+q35_3    0.049664
+q52_7    0.030571
+q14_B    0.024389
+q56_4    0.019608
+q49_2    0.017783
+q60_2    0.014843
+q32_2    0.014519
+q60_3    0.014352
+q66_2    0.013914
+q54_3    0.012937
+q32_3    0.012831
+q11_J    0.012383
+q33_4    0.011682
+q20_K    0.011499
+q41_3    0.011383
+
+
+
+================================================================================
+
+--- INTERPRETABILIDADE COM SHAP (média de |SHAP| por feature) ---
+
+
+--- Top 15 SHAP (Random Forest) para Nacional ---
+
+faixa_etaria                       0.586299
+tp_categoria_administrativa_ies    0.360282
+q10_E                              0.102849
+sigla_uf_curso_RN                  0.047969
+in_capital_curso                   0.044248
+sigla_uf_curso_BA                  0.042546
+sigla_uf_curso_RS                  0.041536
+q11_B                              0.039325
+q14_B                              0.036871
+q16                                0.033424
+sigla_uf_curso_PE                  0.025620
+q11_A                              0.018416
+q10_A                              0.018348
+q19_B                              0.017655
+q53_6                              0.014393
+
+
+--- Top 15 SHAP (XGBoost) para Nacional ---
+
+faixa_etaria                       0.531790
+tp_categoria_administrativa_ies    0.294653
+q10_E                              0.101700
+q53_6                              0.057074
+in_capital_curso                   0.053836
+sigla_uf_curso_SP                  0.052024
+q11_B                              0.051257
+q53_1                              0.050083
+q16                                0.049976
+sigla_uf_curso_BA                  0.048452
+sigla_uf_curso_RS                  0.047059
+q42_6                              0.046781
+q14_B                              0.044532
+sigla_uf_curso_RN                  0.043247
+q57_6                              0.040618
+
+
+--- Importância SHAP das entradas do meta-modelo (RF_pred vs XGB_pred) para Nacional ---
+
+XGB_pred    0.406264
+RF_pred     0.401318
+
+
+
+--- Top 15 SHAP (Random Forest) para Norte ---
+
+tp_categoria_administrativa_ies    0.594450
+faixa_etaria                       0.486845
+in_capital_curso                   0.056453
+q5_C                               0.037878
+q9_B                               0.037626
+q17_B                              0.028831
+q27_4                              0.026842
+q1_E                               0.026513
+q9_C                               0.025911
+q61_5                              0.022733
+q8_F                               0.019754
+q7_H                               0.018472
+q8_G                               0.017380
+q14_B                              0.016310
+q9_E                               0.015288
+
+
+--- Top 15 SHAP (XGBoost) para Norte ---
+
+tp_categoria_administrativa_ies    0.472517
+faixa_etaria                       0.443738
+q9_B                               0.094370
+in_capital_curso                   0.078648
+q5_C                               0.043065
+q43_5                              0.042333
+q17_B                              0.040072
+q32_6                              0.037905
+q40_6                              0.037652
+q35_6                              0.035259
+q64_5                              0.034063
+q9_C                               0.033950
+q27_5                              0.033891
+q11_E                              0.031423
+q14_B                              0.029583
+
+
+--- Importância SHAP das entradas do meta-modelo (RF_pred vs XGB_pred) para Norte ---
+
+RF_pred     0.455882
+XGB_pred    0.235474
+
+
+
+--- Top 15 SHAP (Random Forest) para Nordeste ---
+
+faixa_etaria                       0.749494
+q16                                0.340376
+tp_categoria_administrativa_ies    0.237807
+q10_E                              0.086504
+q17_B                              0.036614
+q64_6                              0.028752
+q5_C                               0.028167
+q2_F                               0.027618
+q5_E                               0.026046
+q47_5                              0.021124
+q8_E                               0.019661
+q14_B                              0.016937
+q60_5                              0.016517
+q19_B                              0.015693
+q46_5                              0.015553
+
+
+--- Top 15 SHAP (XGBoost) para Nordeste ---
+
+faixa_etaria                       0.635693
+q16                                0.338904
+tp_categoria_administrativa_ies    0.268926
+q10_E                              0.158522
+q53_6                              0.083918
+q19_B                              0.071211
+q64_6                              0.068865
+q20_C                              0.052334
+q5_C                               0.051334
+q17_B                              0.047064
+q23_E                              0.041770
+q55_4                              0.041001
+q14_B                              0.040696
+q13_F                              0.040291
+q2_F                               0.040170
+
+
+--- Importância SHAP das entradas do meta-modelo (RF_pred vs XGB_pred) para Nordeste ---
+
+XGB_pred    0.925794
+RF_pred     0.083913
+
+
+
+--- Top 15 SHAP (Random Forest) para Sudeste ---
+
+faixa_etaria                       0.522745
+tp_categoria_administrativa_ies    0.380458
+q14_B                              0.045430
+q10_E                              0.037282
+q11_H                              0.030188
+q11_B                              0.029625
+q19_B                              0.029459
+q17_B                              0.028045
+q8_B                               0.023489
+in_capital_curso                   0.022672
+q16                                0.022203
+q26_F                              0.017791
+q14_A                              0.016078
+q11_A                              0.012804
+q53_6                              0.011598
+
+
+--- Top 15 SHAP (XGBoost) para Sudeste ---
+
+faixa_etaria                       0.461073
+tp_categoria_administrativa_ies    0.306407
+q19_B                              0.067034
+q16                                0.064433
+q10_E                              0.064055
+q14_B                              0.059394
+q53_6                              0.046168
+q11_B                              0.043777
+q17_B                              0.043684
+q57_6                              0.042631
+q42_6                              0.041868
+q41_6                              0.040943
+in_capital_curso                   0.039024
+q11_H                              0.037324
+q8_B                               0.034997
+
+
+--- Importância SHAP das entradas do meta-modelo (RF_pred vs XGB_pred) para Sudeste ---
+
+RF_pred     0.372545
+XGB_pred    0.271341
+
+
+
+--- Top 15 SHAP (Random Forest) para Sul ---
+
+faixa_etaria                       0.672196
+q16                                0.138426
+in_capital_curso                   0.096117
+tp_categoria_administrativa_ies    0.053759
+q9_D                               0.040269
+q46_5                              0.034228
+q53_6                              0.034104
+q7_D                               0.033843
+q14_B                              0.033453
+q5_E                               0.031470
+q10_E                              0.029496
+q11_B                              0.028349
+q23_B                              0.016486
+q28_5                              0.014631
+q18_B                              0.014395
+
+
+--- Top 15 SHAP (XGBoost) para Sul ---
+
+faixa_etaria                       0.607148
+q16                                0.168073
+tp_categoria_administrativa_ies    0.083592
+q10_E                              0.078991
+in_capital_curso                   0.071610
+q53_6                              0.070354
+q5_E                               0.055557
+q46_5                              0.051852
+q40_6                              0.051354
+q7_D                               0.050539
+q39_5                              0.049945
+q24_D                              0.045308
+q14_B                              0.044182
+q13_B                              0.040875
+q23_C                              0.040085
+
+
+--- Importância SHAP das entradas do meta-modelo (RF_pred vs XGB_pred) para Sul ---
+
+RF_pred     0.468281
+XGB_pred    0.200697
+
+
+
+--- Top 15 SHAP (Random Forest) para Centro-Oeste ---
+
+faixa_etaria                       0.589784
+q19_B                              0.039905
+q24_E                              0.036659
+q58_6                              0.036235
+q16                                0.034870
+q10_E                              0.033255
+q41_3                              0.033078
+tp_categoria_administrativa_ies    0.032410
+q14_B                              0.031987
+q4_F                               0.030174
+q25_H                              0.024356
+q7_D                               0.021728
+q35_3                              0.019074
+q6_C                               0.018447
+q41_4                              0.018118
+
+
+--- Top 15 SHAP (XGBoost) para Centro-Oeste ---
+
+faixa_etaria                       0.492788
+q24_E                              0.085941
+q10_E                              0.079441
+q16                                0.065013
+q58_6                              0.064066
+q19_B                              0.060787
+q14_B                              0.047764
+tp_categoria_administrativa_ies    0.046713
+q23_B                              0.039229
+q41_3                              0.037723
+q29_5                              0.035288
+q4_F                               0.034793
+q39_5                              0.033790
+q9_D                               0.031974
+q25_E                              0.031194
+
+
+--- Importância SHAP das entradas do meta-modelo (RF_pred vs XGB_pred) para Centro-Oeste ---
+
+RF_pred     0.515304
+XGB_pred    0.074647
+
