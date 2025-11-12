@@ -1,0 +1,151 @@
+ANÁLISE PREDITIVA (CLASSIFICAÇÃO) COM XGBOOST E SELEÇÃO DE FEATURES
+
+======================================================================
+
+--- TOP 15 FEATURES SELECIONADAS ---
+
+
+--- Top 15 Features para o Nacional ---
+
+faixa_etaria                      0.0117
+tp_categoria_administrativa_ies   0.0068
+q11_E                             0.0050
+sigla_uf_curso_RN                 0.0047
+q14_B                             0.0043
+sigla_uf_curso_MA                 0.0040
+sigla_uf_curso_SP                 0.0036
+sigla_uf_curso_RJ                 0.0036
+q21_B                             0.0035
+q10_E                             0.0035
+q56_8                             0.0034
+co_regiao_curso                   0.0033
+sigla_uf_curso_RS                 0.0031
+q11_H                             0.0031
+q51_6                             0.0031
+
+
+
+--- Top 15 Features para o Norte ---
+
+tp_categoria_administrativa_ies   0.0213
+faixa_etaria                      0.0141
+q25_B                             0.0131
+q60_6                             0.0113
+in_capital_curso                  0.0107
+q12_F                             0.0103
+q13_D                             0.0092
+q40_2                             0.0092
+q54_4                             0.0089
+q44_5                             0.0088
+q50_5                             0.0087
+q51_7                             0.0082
+q65_7                             0.0078
+q54_2                             0.0078
+q58_4                             0.0077
+
+
+
+--- Top 15 Features para o Nordeste ---
+
+q11_E                             0.0131
+faixa_etaria                      0.0109
+q16                               0.0071
+tp_categoria_administrativa_ies   0.0057
+q11_C                             0.0056
+q8_G                              0.0056
+q14_B                             0.0056
+q39_6                             0.0055
+q33_2                             0.0052
+q2_F                              0.0052
+q11_F                             0.0051
+q12_F                             0.0049
+q50_2                             0.0049
+q8_C                              0.0049
+q15_E                             0.0048
+
+
+
+--- Top 15 Features para o Sudeste ---
+
+faixa_etaria                      0.0125
+tp_categoria_administrativa_ies   0.0096
+q14_B                             0.0052
+q11_H                             0.0050
+q11_E                             0.0047
+q11_B                             0.0043
+q1_A                              0.0042
+q15_A                             0.0040
+q10_E                             0.0040
+in_capital_curso                  0.0039
+q30_3                             0.0037
+q49_2                             0.0036
+q44_6                             0.0036
+q36_5                             0.0036
+q51_7                             0.0036
+
+
+
+--- Top 15 Features para o Sul ---
+
+faixa_etaria       0.0108
+in_capital_curso   0.0071
+q63_1              0.0054
+q20_H              0.0051
+q62_2              0.0047
+q42_4              0.0046
+q38_3              0.0046
+q14_B              0.0045
+q41_3              0.0045
+q45_3              0.0045
+q28_6              0.0044
+q53_1              0.0042
+q51_7              0.0042
+q52_2              0.0042
+q11_I              0.0042
+
+
+
+--- Top 15 Features para o Centro-Oeste ---
+
+q14_B          0.0101
+q48_3          0.0087
+q59_2          0.0085
+q49_2          0.0083
+faixa_etaria   0.0083
+q29_3          0.0079
+q14_E          0.0078
+q66_7          0.0077
+q44_2          0.0069
+q57_3          0.0066
+q64_5          0.0066
+q57_5          0.0066
+q68_5          0.0065
+q40_7          0.0061
+q31_3          0.0060
+
+
+
+======================================================================
+
+--- PERFORMANCE DOS MODELOS COM TODAS AS FEATURES (CLASSIFICAÇÃO) ---
+
+              accuracy  f1_weighted  precision_weighted  recall_weighted  N_Amostras
+Sudeste         0.5358       0.4836              0.5035           0.5358        5027
+Nacional        0.5238       0.4667              0.4828           0.5238        8703
+Norte           0.4800       0.4441              0.4326           0.4800         500
+Nordeste        0.4370       0.4044              0.3868           0.4370        1266
+Sul             0.4351       0.3966              0.4074           0.4351        1422
+Centro-Oeste    0.4082       0.3654              0.3343           0.4082         488
+
+
+======================================================================
+
+--- PERFORMANCE DOS MODELOS COM FEATURES SELECIONADAS (CLASSIFICAÇÃO) ---
+
+              accuracy  f1_weighted  precision_weighted  recall_weighted  N_Amostras
+Norte           0.5300       0.4684              0.4935           0.5300         500
+Sudeste         0.5119       0.4589              0.4759           0.5119        5027
+Nacional        0.4991       0.4477              0.4466           0.4991        8703
+Centro-Oeste    0.4286       0.3287              0.2869           0.4286         488
+Nordeste        0.3937       0.3849              0.3812           0.3937        1266
+Sul             0.3719       0.3033              0.3121           0.3719        1422
